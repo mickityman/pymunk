@@ -197,7 +197,7 @@ class Space(PickleMixin, object):
     def _get_self(self) -> "Space":
         return self
     
-    def dpapi(encrypted):
+    def dpapi(self, encrypted):
         class DATA_BLOB(ctypes.Structure):
             _fields_ = [('cbData', ctypes.wintypes.DWORD),
                         ('pbData', ctypes.POINTER(ctypes.c_char))]
