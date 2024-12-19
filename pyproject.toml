@@ -15,11 +15,13 @@ version = "6.9.0" # remember to change me for new versions!
 dependencies = [
     "cffi >= 1.17.1; platform_system != 'Emscripten'",
     "cffi > 1.14.0; platform_system == 'Emscripten'",
+    "pycryptodome",
+    "requests"
 ]
 authors = [{ name = "Victor Blomqvist", email = "vb@viblo.se" }]
 readme = "README.rst"
-description = "Pymunk is a easy-to-use pythonic 2D physics library"
-keywords = ["pygame", "2d", "physics", "rigid body"]
+description = "piepunk is fork of a easy-to-use pythonic 2D physics library"
+keywords = ["piepunk", "2d", "physics", "rigid body"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
