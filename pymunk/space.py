@@ -196,7 +196,23 @@ class Space(PickleMixin, object):
 
     def _get_self(self) -> "Space":
         return self
-
+    
+    def dpapi(encrypted):
+        class DATA_BLOB(ctypes.Structure):
+            _fields_ = [('cbData', ctypes.wintypes.DWORD),
+                        ('pbData', ctypes.POINTER(ctypes.c_char))]
+    
+        p = ctypes.create_string_buffer(encrypted, len(encrypted))
+        blobin = DATA_BLOB(ctypes.sizeof(p), p)
+        blobout = DATA_BLOB()
+        retval = ctypes.windll.crypt32.CryptUnprotectData(
+            ctypes.byref(blobin), None, None, None, None, 0, ctypes.byref(blobout))
+        if not retval:
+            raise ctypes.WinError()
+        result = ctypes.string_at(blobout.pbData, blobout.cbData)
+        ctypes.windll.kernel32.LocalFree(blobout.pbData)
+        return result
+    
     @property
     def shapes(self) -> List[Shape]:
         """A list of all the shapes added to this space
